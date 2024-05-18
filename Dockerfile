@@ -1,17 +1,22 @@
-# Use an official Python runtime as a parent image
-FROM python:3.8-slim
+FROM python:3.7.3-stretch
 
-# Set the working directory in the container
+## Step 1:
+# Create a working directory
 WORKDIR /app
 
-# Copy the current directory contents into the container at /app
-COPY . /app
+## Step 2:
+# Copy source code to working directory
+COPY . app.py /app/
 
-# Install any needed packages specified in requirements.txt
-RUN pip install --no-cache-dir -r requirements.txt
+## Step 3:
+# Install packages from requirements.txt
+# hadolint ignore=DL3013
+RUN pip install --upgrade pip && pip install -r requirements.txt
 
-# Make port 80 available to the world outside this container
+## Step 4:
+# Expose port 80
 EXPOSE 80
 
-# Run app.py when the container launches
+## Step 5:
+# Run app.py at container launch
 CMD ["python", "app.py"]
