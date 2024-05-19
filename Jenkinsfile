@@ -15,7 +15,7 @@ pipeline {
                 script {
                     // Publish the Docker image to Dockerhub
                     // Note: Actual publishing is not required as per the instructions
-                    withDockerRegistry([ credentialsId: "docker-hub-credentials", url: "" ]) {
+                    docker.withRegistry('', 'docker-hub-credentials') {
                         dockerImage.push("${env.BUILD_NUMBER}")
                         dockerImage.push("latest")
                     }
