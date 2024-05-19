@@ -19,7 +19,7 @@ pipeline {
             steps {
                 script {
                     // Login to Docker Hub and push the image
-                    docker.withRegistry('https://index.docker.io/v1/', 'docker-hub-credentials') {
+                    docker.withRegistry('docker login docker.io', 'docker-hub-credentials') {
                         dockerImage.push("${env.BUILD_NUMBER}")
                         dockerImage.push("latest")
                     }
